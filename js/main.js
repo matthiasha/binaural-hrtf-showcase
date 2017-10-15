@@ -8,12 +8,11 @@ window.onload = function() {
 	var orbiter, pattern = 1, orbitSpeed = 0.01;	
 	var audioElement, panner, masterGain;
 	var subjects = [], currentSubject = {}, currentSubjectIndex = -1;
-	var tracks = [
-		"assets/audio/core3.mp3",
-		"assets/audio/trumpet.ogg",
-		"assets/audio/rotor.wav",
-		"assets/audio/square.wav"
-	];
+	var tracks = { "Robot": "assets/audio/core3.mp3", 
+                   "Trumpet": "assets/audio/trumpet.ogg", 
+                   "Helicopter": "assets/audio/rotor.wav", 
+                   "Saw": "assets/audio/square.wav",
+    };
 	var views = [
 			{
 				left: 0,
@@ -188,8 +187,8 @@ window.onload = function() {
 		folder3.add(guiParams, "gain").min(0).max(1).name("Volume").onChange(function(value) {
 			masterGain.gain.value = value;
 		});
-		folder3.add(guiParams, "sound").options({ "Robot": 0, "Trumpet": 1, "Helicopter": 2, "Saw": 3 }).name("Sound").onChange(function(value) {
-			audioElement.src = tracks[value];
+		folder3.add(guiParams, "sound").options(tracks).name("Sound").onChange(function(value) {
+			audioElement.src = value;
 			audioElement.play();
 		});
 		folder3.add(guiParams, "pattern").options(1, 2, 3).name("Orbit pattern").onChange(function(value) {
